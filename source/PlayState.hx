@@ -48,7 +48,6 @@ import Shaders;
 import haxe.Exception;
 import openfl.utils.Assets;
 import ModChart;
-#if windows
 import vm.lua.LuaVM;
 import vm.lua.Exception;
 import Sys;
@@ -57,7 +56,6 @@ import llua.Convert;
 import llua.Lua;
 import llua.State;
 import llua.LuaL;
-#end
 
 using StringTools;
 
@@ -348,12 +346,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 
-		//lua = new LuaVM();
-		#if windows
-			luaModchartExists = FileSystem.exists(Paths.modchart(SONG.song.toLowerCase()));
-		#end
-
-
+		luaModchartExists = FileSystem.exists(SUtil.getPath() + Paths.modchart(SONG.song.toLowerCase()));
 
 		grade = ScoreUtils.gradeArray[0] + " (FC)";
 		hitNotes=0;
@@ -1053,7 +1046,7 @@ class PlayState extends MusicBeatState
 				i.Register(lua.state);
 
 			try {
-				lua.runFile(Paths.modchart(SONG.song.toLowerCase()));
+				lua.runFile(SUtil.getPath() + Paths.modchart(SONG.song.toLowerCase()));
 			}catch (e:Exception){
 				trace("ERROR: " + e);
 			};
