@@ -12,6 +12,7 @@ class Hitbox extends FlxSpriteGroup
 {
 	var hitboxframes:FlxAtlasFrames;
 	var hitbox_hint:FlxSprite;
+        public var hitbox:FlxSpriteGroup;
 	
 	var sizex:Float = 142;
 
