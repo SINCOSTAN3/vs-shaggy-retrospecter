@@ -2153,15 +2153,11 @@ class PlayState extends MusicBeatState
 		#end
 		if (FlxG.keys.justPressed.SEVEN)
 		{
-
-
-			#if windows
 			if(lua!=null){
 				lua.destroy();
 				trace("cringe");
 				lua=null;
 			}
-			#end
 			FlxG.switchState(new ChartingState());
 			Cache.Clear();
 
@@ -2208,22 +2204,18 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.EIGHT){
 				FlxG.switchState(new AnimationDebug(SONG.player2));
 				Cache.Clear();
-				#if windows
 				if(lua!=null){
 					lua.destroy();
 					lua=null;
 				}
-				#end
 			}
 			if (FlxG.keys.justPressed.NINE){
 				FlxG.switchState(new AnimationDebug(SONG.player1));
 				Cache.Clear();
-				#if windows
 				if(lua!=null){
 					lua.destroy();
 					lua=null;
 				}
-				#end
 			}
 		if (startingSong)
 		{
@@ -2729,12 +2721,11 @@ class PlayState extends MusicBeatState
 		vocals.volume = 0;
 		FlxG.sound.music.stop();
 
-		#if windows
 		if(lua!=null){
 			lua.destroy();
 			lua=null;
 		}
-		#end
+
 		if (SONG.validScore)
 		{
 			#if !switch
