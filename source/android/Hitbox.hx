@@ -42,15 +42,15 @@ class Hitbox extends FlxSpriteGroup
 
 		hitbox = new FlxSpriteGroup();
 		hitboxframes = Paths.getSparrowAtlas('androidcontrols/hitbox');
-        hitbox.add(add(k1 = createhitbox(0, "k1", 0)));
-        hitbox.add(add(k2 = createhitbox(sizex, "k2", 1)));
-        hitbox.add(add(k3 = createhitbox(sizex * 2, "k3", 2)));
-        hitbox.add(add(k4 = createhitbox(sizex * 3, "k4", 3)));    
-        hitbox.add(add(k5 = createhitbox(sizex * 4, "k5", 4)));
-        hitbox.add(add(k6 = createhitbox(sizex * 5, "k6", 5))); 
-        hitbox.add(add(k7 = createhitbox(sizex * 6, "k7", 6)));
-        hitbox.add(add(k8 = createhitbox(sizex * 7, "k8", 7))); 
-        hitbox.add(add(k9 = createhitbox(sizex * 8, "k9", 8)));
+        hitbox.add(add(k1 = createhitbox(0, "k1")));
+        hitbox.add(add(k2 = createhitbox(sizex, "k2")));
+        hitbox.add(add(k3 = createhitbox(sizex * 2, "k3")));
+        hitbox.add(add(k4 = createhitbox(sizex * 3, "k4")));    
+        hitbox.add(add(k5 = createhitbox(sizex * 4, "k5")));
+        hitbox.add(add(k6 = createhitbox(sizex * 5, "k6"))); 
+        hitbox.add(add(k7 = createhitbox(sizex * 6, "k7")));
+        hitbox.add(add(k8 = createhitbox(sizex * 7, "k8"))); 
+        hitbox.add(add(k9 = createhitbox(sizex * 8, "k9")));
 
 		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
 		hitbox_hint.alpha = 0.75;
