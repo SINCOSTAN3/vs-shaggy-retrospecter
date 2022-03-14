@@ -273,7 +273,7 @@ class Character extends FlxSprite
 		if(Cache.offsetData[char]!=null){
 			offsets = CoolUtil.coolTextFile2(Cache.offsetData[char]);
 		}else{
-			var data = File.getContent("assets/shared/images/characters/"+char+"Offsets.txt");
+			var data = File.getContent(SUtil.getPath() + "assets/shared/images/characters/"+char+"Offsets.txt");
 			offsets = CoolUtil.coolTextFile2(data);
 			Cache.offsetData[char] = data;
 		}
@@ -291,7 +291,7 @@ class Character extends FlxSprite
 			if(Cache.offsetData[curCharacter]!=null){
 				anims = CoolUtil.coolTextFile2(Cache.animData[curCharacter]);
 			}else{
-				var data = File.getContent("assets/shared/images/characters/"+curCharacter+"Anims.txt");
+				var data = File.getContent(SUtil.getPath() + "assets/shared/images/characters/"+curCharacter+"Anims.txt");
 				anims = CoolUtil.coolTextFile2(data);
 				Cache.animData[curCharacter] = data;
 			}
