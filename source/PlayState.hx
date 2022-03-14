@@ -910,6 +910,10 @@ class PlayState extends MusicBeatState
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
 
+                #if android
+	        addHitbox();
+                #end
+
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 		if(luaModchartExists && currentOptions.loadModcharts){
@@ -1307,7 +1311,20 @@ class PlayState extends MusicBeatState
 					{
 						skip = true;
 					}
-					if (FlxG.keys.justReleased.ANY || skip)
+
+		                        #if android
+                                        var justTouched:Bool = false;
+
+		                        for (touch in FlxG.touches.list)
+		                        {
+			                        if (touch.justPressed)
+			                        {
+				                        justTouched = true;
+			                        }
+		                        }
+		                        #end
+
+					if (FlxG.keys.justReleased.ANY  #if android || justTouched #end || skip)
 					{
 						if ((curr_char <= dialogue[curr_dial].length) && !skip)
 						{
@@ -1386,6 +1403,11 @@ class PlayState extends MusicBeatState
 		if(luaModchartExists && lua!=null){
 			lua.call("startCountdown",[]);
 		}
+
+	        #if android
+	        _hitbox.visible = true;
+	        #end
+
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 
@@ -2087,7 +2109,7 @@ class PlayState extends MusicBeatState
 		if(FlxG.keys.justPressed.THREE){
 			camHUD.visible=!camHUD.visible;
 		}
-		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+		if (FlxG.keys.justPressed.ENTER	#if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2720,6 +2742,9 @@ class PlayState extends MusicBeatState
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
 		FlxG.sound.music.stop();
+	        #if android
+	        _hitbox.visible = false;
+	        #end
 
 		if(lua!=null){
 			lua.destroy();
