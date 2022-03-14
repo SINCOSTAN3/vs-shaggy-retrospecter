@@ -66,6 +66,10 @@ class SoundOffsetState extends MusicBeatState
     metronome.screenCenter(XY);
     metronome.y += 100;
     add(metronome);
+
+        #if android
+	addVirtualPad(FULL, A_B_C_X_Y);
+        #end
   }
 
   override function beatHit(){
@@ -103,7 +107,7 @@ class SoundOffsetState extends MusicBeatState
     offsetTxt.text = 'Current offset:  ${currOffset}ms';
 
     status.screenCenter(X);
-    if(FlxG.keys.justPressed.SPACE){
+    if(FlxG.keys.justPressed.SPACE #if android || _virtualpad.buttonX.justPressed #end){
       playingAudio = !playingAudio;
       if(playingAudio==false){
         OptionUtils.options.noteOffset=currOffset;
@@ -111,7 +115,7 @@ class SoundOffsetState extends MusicBeatState
     }
 
     if(playingAudio){
-      if(FlxG.keys.justPressed.ENTER){
+      if(controls.ACCEPT){
         beatCounts.push(beatCounter);
         var total:Float = 0;
         for(i in beatCounts){
@@ -120,28 +124,28 @@ class SoundOffsetState extends MusicBeatState
         currOffset=Std.int(total/beatCounts.length);
       }
     }
-    if(FlxG.keys.justPressed.R){
+    if(FlxG.keys.justPressed.R #if android || _virtualpad.buttonC.justPressed #end){
       beatCounts = [];
       currOffset = 0;
     }
-    if(FlxG.keys.justPressed.ESCAPE){
+    if(controls.BACK){
       OptionUtils.options.noteOffset = currOffset;
       OptionUtils.saveOptions(OptionUtils.options);
       FlxG.switchState(new OptionsMenu());
     }
 
-    if(!FlxG.keys.pressed.SHIFT){
-      if(FlxG.keys.pressed.LEFT){
+    if(!FlxG.keys.pressed.SHIFT #if android || _virtualpad.buttonY.pressed #end){
+      if(controls.LEFT){
         currOffset--;
       };
-      if(FlxG.keys.pressed.RIGHT){
+      if(controls.RIGHT){
         currOffset++;
       };
     }else{
-      if(FlxG.keys.justPressed.LEFT){
+      if(controls.LEFT_P){
         currOffset--;
       };
-      if(FlxG.keys.justPressed.RIGHT){
+      if(controls.RIGHT_P){
         currOffset++;
       };
     }
