@@ -46,7 +46,7 @@ class MusicBeatState extends FlxUIState
 	public function addHitbox() {               
 		_hitbox = new Hitbox();
 
-		controls.setHitbox(_hitbox);
+		controls.setHitBox(_hitbox);
 		trackedinputs = controls.trackedinputs;
 		controls.trackedinputs = [];
 
