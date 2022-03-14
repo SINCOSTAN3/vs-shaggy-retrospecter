@@ -7,6 +7,11 @@ import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;
 import flixel.util.FlxTimer;
 import Options;
+#if android
+import flixel.input.actions.FlxActionInput;
+import ui.FlxVirtualPad;
+import ui.Hitbox;
+#end
 
 class MusicBeatState extends FlxUIState
 {
@@ -19,6 +24,58 @@ class MusicBeatState extends FlxUIState
 
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
+
+	#if android
+	var _virtualpad:FlxVirtualPad;
+	var _hitbox:Hitbox;
+	var trackedinputs:Array<FlxActionInput> = [];
+	#end
+	
+	public function addVirtualPad(?DPad:FlxDPadMode, ?Action:FlxActionMode) {
+		#if android
+		_virtualpad = new FlxVirtualPad(DPad, Action);
+		_virtualpad.alpha = 0.75;
+		add(_virtualpad);
+		controls.setVirtualPad(_virtualpad, DPad, Action);
+		trackedinputs = controls.trackedinputs;
+		controls.trackedinputs = [];
+		#end
+	}
+
+	public function addHitbox() {
+                #if android               
+		_hitbox = new Hitbox();
+
+		controls.setHitbox(_hitbox);
+		trackedinputs = controls.trackedinputs;
+		controls.trackedinputs = [];
+
+		var camcontrol = new flixel.FlxCamera();
+		FlxG.cameras.add(camcontrol);
+		camcontrol.bgColor.alpha = 0;
+		_hitbox.cameras = [camcontrol];
+
+		_hitbox.visible = false;
+		add(_hitbox);
+                #end
+	}
+
+        public function addPadCamera() {
+		#if android
+		var camcontrol = new flixel.FlxCamera();
+		FlxG.cameras.add(camcontrol);
+		camcontrol.bgColor.alpha = 0;
+		_virtualpad.cameras = [camcontrol];
+		#end
+	}
+	
+	override function destroy() {
+		#if android
+		controls.removeFlxInput(trackedinputs);
+		#end	
+		
+		super.destroy();
+	}
 
 	override function create()
 	{
