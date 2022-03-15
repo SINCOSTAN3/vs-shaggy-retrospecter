@@ -451,14 +451,14 @@ class Controls extends FlxActionSet
 
 	public function setHitBox(hitbox:Hitbox) 
 	{
-		inline forEachBound(Control.UP, (action, state) -> addbutton(action, hitbox.k1, state));
+		inline forEachBound(Control.LEFT, (action, state) -> addbutton(action, hitbox.k1, state));
 		inline forEachBound(Control.DOWN, (action, state) -> addbutton(action, hitbox.k2, state));
-		inline forEachBound(Control.LEFT, (action, state) -> addbutton(action, hitbox.k3, state));
+		inline forEachBound(Control.UP, (action, state) -> addbutton(action, hitbox.k3, state));
 		inline forEachBound(Control.RIGHT, (action, state) -> addbutton(action, hitbox.k4, state));
 		inline forEachBound(Control.MID, (action, state) -> addbutton(action, hitbox.k5, state));
-		inline forEachBound(Control.UP2, (action, state) -> addbutton(action, hitbox.k6, state));
+		inline forEachBound(Control.LEFT2, (action, state) -> addbutton(action, hitbox.k6, state));
 		inline forEachBound(Control.DOWN2, (action, state) -> addbutton(action, hitbox.k7, state));
-		inline forEachBound(Control.LEFT2, (action, state) -> addbutton(action, hitbox.k8, state));
+		inline forEachBound(Control.UP2, (action, state) -> addbutton(action, hitbox.k8, state));
 		inline forEachBound(Control.RIGHT2, (action, state) -> addbutton(action, hitbox.k9, state));	
 	}
 	
